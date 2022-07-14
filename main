@@ -1,0 +1,51 @@
+def sum(x, y, z ):
+    return x+y+z
+
+def Play_Board(Cross, O): 
+    zero = 'X' if Cross[0] else ('O' if O[0] else 0)
+    one = 'X' if Cross[1] else ('O' if O[1] else 1)
+    two = 'X' if Cross[2] else ('O' if O[2] else 2)
+    three = 'X' if Cross[3] else ('O' if O[3] else 3)
+    four = 'X' if Cross[4] else ('O' if O[4] else 4)
+    five = 'X' if Cross[5] else ('O' if O[5] else 5)
+    six = 'X' if Cross[6] else ('O' if O[6] else 6)
+    seven = 'X' if Cross[7] else ('O' if O[7] else 7)
+    eight = 'X' if Cross[8] else ('O' if O[8] else 8)
+    print(f"{zero} | {one} | {two} ")
+    print(f"--|---|---")
+    print(f"{three} | {four} | {five} ")
+    print(f"--|---|---")
+    print(f"{six} | {seven} | {eight} ") 
+
+def checkWin(xState, zState):
+    Place_wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+    for wining in Place_wins:
+        if(sum(Cross[wining[0]], Cross[wining[1]], Cross[wining[2]]) == 3):
+            print("X Won the game")
+            return 1
+        if(sum(O[wining[0]], O[wining[1]], O[wining[2]]) == 3):
+            print("O Won the game")
+            return 0
+    return -1
+    
+if __name__ == "__main__":
+    Cross= [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    O = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    turn = 1 # 1 for X and 0 for O
+    print("Tic Tac Toe")
+    while(True):
+        Play_Board(Cross, O)
+        if(turn == 1):
+            print("X's Chance")
+            value = int(input("Please enter a Place where you want to place X: "))
+            Cross[value] = 1
+        else:
+            print("O's Chance")
+            value = int(input("Please enter a Place where you want to place O: "))
+            O[value] = 1
+        cwin = checkWin(Cross,O)
+        if(cwin != -1):
+            print("Game over")
+            break
+        
+        turn = 1 - turn
